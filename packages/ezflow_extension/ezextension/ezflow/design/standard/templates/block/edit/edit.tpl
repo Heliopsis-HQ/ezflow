@@ -86,11 +86,29 @@
 	            </div>
 	            <div class="break"></div>
 	        {else}
-	            <label>{if is_set( $fetch_params_names[$fetch_parameter] )}{$fetch_params_names[$fetch_parameter]}{else}{$fetch_parameter}{/if}:</label>
-	            {if is_set( $fetch_params_types[$fetch_parameter] )} 
-	                {include uri=concat( "design:fetch_params_types/", $fetch_params_types[$fetch_parameter], ".tpl" )}
+	            {if is_set( $fetch_params_types[$fetch_parameter] )}
+	                <div> 
+	                {include uri=concat( "design:ezflow_block_attributes/", $fetch_params_types[$fetch_parameter], ".tpl" )
+                             name="fetch_parameter"
+                             label=cond( is_set( $fetch_params_names[$fetch_parameter] ), $fetch_params_names[$fetch_parameter], $fetch_parameter )
+                             value=$fetch_params[$fetch_parameter]
+                             attribute_id=concat( 'block-fetch-parameter-', $fetch_parameter, '-', $block_id )
+                             attribute_name=concat( 'ContentObjectAttribute_ezpage_block_fetch_param_', $attribute.id, '[', $zone_id, '][', $block_id, '][', $fetch_parameter, ']' )
+                             block=$block
+                             attribute=$fetch_parameter
+                             attribute_type="fetch_parameter"
+                             attribute_datatype=$fetch_params_types[$fetch_parameter]
+                             fetch_params=$fetch_params}
+                     </div>
 	            {else}
-	                {include uri=concat( "design:fetch_params_types/default.tpl" )}
+	                <div>
+	                {include uri=concat( "design:ezflow_block_attributes/default.tpl" )
+	                         name="fetch_parameter"
+                             label=cond( is_set( $fetch_params_names[$fetch_parameter] ), $fetch_params_names[$fetch_parameter], $fetch_parameter )
+	                         value=$fetch_params[$fetch_parameter]
+	                         attribute_id=concat( 'block-fetch-parameter-', $fetch_parameter, '-', $block_id )
+                             attribute_name=concat( 'ContentObjectAttribute_ezpage_block_fetch_param_', $attribute.id, '[', $zone_id, '][', $block_id, '][', $fetch_parameter, ']' )}
+                    </div>
 	            {/if}
 	        {/if}
         {/foreach}
@@ -130,11 +148,29 @@
                     {/if}
                 </div>
             {else}
-                <label>{if is_set( $custom_attribute_names[$custom_attrib] )}{$custom_attribute_names[$custom_attrib]}{else}{$custom_attrib}{/if}:</label> 
                 {if is_set( $custom_attribute_types[$custom_attrib] )}
-                    {include uri=concat( "design:custom_attribute_types/", $custom_attribute_types[$custom_attrib], ".tpl" )}
+                    <div>
+                    {include uri=concat( "design:ezflow_block_attributes/", $custom_attribute_types[$custom_attrib], ".tpl" )
+                             name="custom_attribute"
+                             label=cond( is_set( $custom_attribute_names[$custom_attrib] ), $custom_attribute_names[$custom_attrib], $custom_attrib )
+                             value=$block.custom_attributes[$custom_attrib]|wash()
+                             attribute_id=concat( 'block-custom_attribute-', $block_id, '-', $loop_count )
+                             attribute_name=concat( 'ContentObjectAttribute_ezpage_block_custom_attribute_', $attribute.id, '[', $zone_id, '][', $block_id, '][', $custom_attrib, ']' )
+                             block=$block
+                             attribute=$custom_attrib
+                             attribute_type="custom_attribute"
+                             attribute_datatype=$custom_attribute_types[$custom_attrib]
+                             fetch_params=$fetch_params}
+                    </div>
                 {else}
-                    {include uri=concat( "design:custom_attribute_types/default.tpl" )}
+                    <div>
+                    {include uri=concat( "design:ezflow_block_attributes/default.tpl" )
+                             name="custom_attribute"
+                             label=cond( is_set( $custom_attribute_names[$custom_attrib] ), $custom_attribute_names[$custom_attrib], $custom_attrib )
+                             value=$block.custom_attributes[$custom_attrib]|wash()
+                             attribute_id=concat( 'block-custom_attribute-', $block_id, '-', $loop_count )
+                             attribute_name=concat( 'ContentObjectAttribute_ezpage_block_custom_attribute_', $attribute.id, '[', $zone_id, '][', $block_id, '][', $custom_attrib, ']' )}
+                    </div>
                 {/if}
             {/if}
             {undef $use_browse_mode}
