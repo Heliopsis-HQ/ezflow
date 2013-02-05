@@ -2,9 +2,6 @@
     $selections = cond( $attribute_type|eq( 'custom_attribute' ), 
                         ezini( $block.type, concat( 'CustomAttributeSelection_', $attribute ), 'block.ini' ),
                         ezini( $block.type, concat( 'FetchParametersSelection_', $attribute ), 'block.ini' ) )
-    $attribute_value = cond( $attribute_type|eq( 'custom_attribute' ),
-                             $block.custom_attributes[$attribute],
-                             $fetch_params[$attribute] )
 }
 
 {if is_set( $label )}<label>{$label}:</label>{/if}

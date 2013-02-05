@@ -1,1 +1,0 @@
-{include uri="design:ezflow_block_attributes/string.tpl"}
